@@ -37,8 +37,10 @@ for(const site of data){
 
         const inputField = page.locator('#keywords');
 
-        await inputField.fill(site.search);
+        
 
+        await inputField.waitFor();
+        await inputField.fill(site.search);
         
         const categoryButton = page.getByRole('button', { name: 'Kategorije' });
         await categoryButton.click();
@@ -66,9 +68,10 @@ for(const site of data){
         const submitButton = page.locator('#submitButton');
         await submitButton.click();
 
-
-        const items = page.locator('.EntityList-items li');
-        const count = await items.count();
+       const items = page.locator('.EntityList-items li');
+       const count = await items.count();
         await expect(count).toBeGreaterThan(0);
+
     });
+
 }
