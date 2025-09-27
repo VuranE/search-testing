@@ -29,23 +29,46 @@ for(const site of data){
         await page.goto(site.url);
 
         
-         const agreeButton = page.locator('#didomi-notice-agree-button');
+        const agreeButton = page.locator('#didomi-notice-agree-button');
+        
         if (await agreeButton.isVisible({ timeout: 5000 })) {
-        await agreeButton.click();
+            await agreeButton.click();
         }
 
         const inputField = page.locator('#keywords');
 
         await inputField.fill(site.search);
+
         
         const categoryButton = page.getByRole('button', { name: 'Kategorije' });
         await categoryButton.click();
 
-       
-const categoryOption = page.locator('li[role="option"]', { hasText: new RegExp(`^${site.category}$`) });
-await categoryOption.click();
+            
+        const categoryOption = page.locator('li[role="option"]', { hasText: new RegExp(`^${site.category}$`) });
+        await categoryOption.click();
 
-        await expect(page).toHaveURL("https://www.njuskalo.hr/auti/audi");
 
+        const filterButton = page.locator('li:has-text("Filtri"), li:has-text("Filteri")');
+        if(await filterButton.isVisible()){
+           await filterButton.click();
+        }
+        
+        const minManufacturedYear = page.locator("#yearManufactured\\[min\\]");
+    
+        await minManufacturedYear.selectOption(site.yearFrom);
+
+        const maxManufacturedYear = page.locator("#yearManufactured\\[max\\]");
+        await maxManufacturedYear.selectOption(site.yearTo);
+
+        const mileageMin = page.locator("#mileage\\[max\\]");
+        await mileageMin.fill(site.distanceTo);
+
+        const submitButton = page.locator('#submitButton');
+        await submitButton.click();
+
+
+        const items = page.locator('.EntityList-items li');
+        const count = await items.count();
+        await expect(count).toBeGreaterThan(0);
     });
 }
