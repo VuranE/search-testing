@@ -1,0 +1,22 @@
+{
+  "name": "search-testing",
+  "version": "1.0.0",
+  "description": "Selekcijsli zadatak za Njuškalo technology",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VuranE/search-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VuranE/search-testing/issues"
+  },
+  "homepage": "https://github.com/VuranE/search-testing#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2"
+  }
+}
