@@ -73,7 +73,7 @@ for(const site of data){
         const year = parseInt(yearStr, 10);
         
         expect(mileage).toBeLessThanOrEqual(site.mileageMax);
-        expect(year).toBeGreaterThanOrEqual(site.yearManufacturedMax);
+        expect(year).toBeGreaterThanOrEqual(site.yearManufacturedMin);
         expect(year).toBeLessThanOrEqual(site.yearManufacturedMax);
       }
     }
