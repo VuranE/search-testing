@@ -34,7 +34,9 @@ for(const site of data){
     const inputField = page.locator('#keywords');
     await inputField.fill(site.search);
         
-    await page.getByRole('button', { name: 'Kategorije' }).click();
+    const button = page.getByRole('button', { name: 'Kategorije' });
+    expect(button).toBeVisible({ timeout: 5000 });
+    await button.click(); 
     await page.getByRole('option', { name: site.category, exact: true }).locator('span').click();
         
     await page.locator('[id="yearManufactured[min]"]').selectOption(site.yearManufacturedMax.toString());
